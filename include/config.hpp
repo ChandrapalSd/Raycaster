@@ -3,26 +3,27 @@
 namespace config
 {
     const int TargetFPS = 60;
-    const int WindowWidth = 602;
-    const int WindowHeight = 602;
+    const int WindowWidth = 702;
+    const int WindowHeight = 702;
     const char* WindowTitle = "Raylib RayCaster";
     const Color bgColor = BLACK;
 
-    const int cellPadding = 3;
-    const int cellSize = 60;
+    const float pointRadius = 7;
+    const float cellPadding = 3;
+    const int cellSize = 70;
     const int mapR = 10, mapC = 10;
     const int map[mapR][mapC] = 
     {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+        {1, 1, 1, 1, 1, 0, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     const Color mapColors[] = {WHITE, DARKGRAY};
 
