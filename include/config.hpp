@@ -8,8 +8,8 @@ namespace config
     const char* WindowTitle = "Raylib RayCaster";
     const Color bgColor = BLACK;
 
-    const float fovDeg = 45;
-    const float pointRadius = 7;
+    const float fovDeg = 60;
+    const float pointRadius = 5;
     const float cellPadding = 3;
     const int cellSize = 70;
     const int mapR = 10, mapC = 10;

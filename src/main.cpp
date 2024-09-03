@@ -161,7 +161,7 @@ int main()
 
         float r = config::pointRadius;
         float t = 3;
-        Vector2 dir{e.x-s.x, e.y-s.y};
+        const Vector2 dir = normalize({e.x-s.x, e.y-s.y});
         DrawCircleV(s, r, RED);
         // DrawLineEx(s, e, t, GREEN);        
         
@@ -171,23 +171,30 @@ int main()
             DrawCircleV(res, r/2, RED);
         }*/
         
-        Vector2 d = normalize(dir);
-        for (int i = 0; i < 10; i++)
+        const float fov = config::fovDeg * (PI / 180);
+        float dirAngle;
+        if (dir.x < 0)
         {
-            Vector2 res = castRay(s, d, config::map, config::mapR, config::mapC, r);
-            DrawLineEx(s, res, t, GREEN);        
-            DrawCircleV(res, r/1.5, DARKPURPLE);
-            d.x += 0.1;
-            d = normalize(d);
+            dirAngle = std::atanf(dir.y / dir.x) + (dir.y<0? -PI : PI);
         }
-        d = normalize(dir);
-        for (int i = 0; i < 10; i++)
+        else if (dir.x > 0)
         {
-            d.x -= 0.1;
-            d = normalize(d);
+            dirAngle = std::atanf(dir.y / dir.x);
+        }
+        else if(dir.x == 0)
+        {
+            dirAngle = dir.y < 0 ? -PI / 2 : PI / 2;
+        }
+
+        float angle = dirAngle - fov/2;
+
+        while(angle <= dirAngle+fov/2)
+        {
+            const Vector2 d{cosf(angle), sinf(angle)};
             Vector2 res = castRay(s, d, config::map, config::mapR, config::mapC, r);
             DrawLineEx(s, res, t, GREEN);        
             DrawCircleV(res, r/1.5, DARKPURPLE);
+            angle += (fov / 64);
         }
 
         /*char txt[100];
