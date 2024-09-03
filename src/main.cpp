@@ -20,6 +20,17 @@ float distSq(Vector2 a, Vector2 b)
     return (b.x-a.x)*(b.x-a.x) + (b.y-a.y)*(b.y-a.y);
 }
 
+float length(const Vector2 v)
+{
+    return std::sqrtf(v.x * v.x + v.y * v.y);
+}
+
+Vector2 normalize(const Vector2 v)
+{
+    float l = length(v);
+    return { v.x / l, v.y/l };
+}
+
 std::ostream& operator<<(std::ostream& os, const Vector2& v) {
         os << v.x << ", " << v.y;
         return os;
@@ -160,10 +171,24 @@ int main()
             DrawCircleV(res, r/2, RED);
         }*/
         
-        Vector2 res = castRay(s, dir, config::map, config::mapR, config::mapC, r);
-        //const Vector2 res = rayStep(s, dir);
-        DrawLineEx(s, res, t, GREEN);        
-        DrawCircleV(res, r/1.5, DARKPURPLE);
+        Vector2 d = normalize(dir);
+        for (int i = 0; i < 10; i++)
+        {
+            Vector2 res = castRay(s, d, config::map, config::mapR, config::mapC, r);
+            DrawLineEx(s, res, t, GREEN);        
+            DrawCircleV(res, r/1.5, DARKPURPLE);
+            d.x += 0.1;
+            d = normalize(d);
+        }
+        d = normalize(dir);
+        for (int i = 0; i < 10; i++)
+        {
+            d.x -= 0.1;
+            d = normalize(d);
+            Vector2 res = castRay(s, d, config::map, config::mapR, config::mapC, r);
+            DrawLineEx(s, res, t, GREEN);        
+            DrawCircleV(res, r/1.5, DARKPURPLE);
+        }
 
         /*char txt[100];
         sprintf(txt, "%f, %f", e.x, e.y);
